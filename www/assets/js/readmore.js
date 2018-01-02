@@ -15,7 +15,7 @@ $(function(){
     })
     .then(function(data){
         for (var i=0; i<defaultNum; i++) {
-            $('<li class="main__articleItem"><span>' + data[0].columns01[i].ttl + '</span>' + data[0].columns01[i].date + '<br>' + data[0].columns01[i].txt +'</li>').appendTo(setArea);
+            $('<li class="main__articleItem"><span>' + data.columns01[i].ttl + '</span>' + data.columns01[i].date + '<br>' + data.columns01[i].txt +'</li>').appendTo(setArea);
         }
     })
  
@@ -25,7 +25,7 @@ $(function(){
             url: '/assets/json/readmore.json'
         })
         .then(function (data) {// 1つめは通信成功時のコールバック
-            var dataLengh = data[0].columns01.length;
+            var dataLengh = data.columns01.length;
             var loadItemLength = setArea.find('.main__articleItem').length;
             var setAdj = (dataLengh)-(loadItemLength); //残りの記事
             var setBeg = (dataLengh)-(setAdj); //表示されている記事
@@ -38,24 +38,24 @@ $(function(){
 
                     if(dataLengh <= loadNum){ //総記事が3未満のときはすべての記事を読み込み「もっと見るボタン」を削除
                         for (var i=0; i<dataLengh; i++) {
-                            $('<li class="main__articleItem"><span>' + data[0].columns01[i].ttl + '</span>' + data[0].columns01[i].date + '<br>' + data[0].columns01[i].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
+                            $('<li class="main__articleItem"><span>' + data.columns01[i].ttl + '</span>' + data.columns01[i].date + '<br>' + data.columns01[i].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
                         }
                         setMore.remove();
                     } else {
                         for (var i=0; i<loadNum; i++) { //総記事が3以上のときは3記事分を読み込むs
-                            $('<li class="main__articleItem"><span>' + data[0].columns01[i].ttl + '</span>' + data[0].columns01[i].date + '<br>' + data[0].columns01[i].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
+                            $('<li class="main__articleItem"><span>' + data.columns01[i].ttl + '</span>' + data.columns01[i].date + '<br>' + data.columns01[i].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
                         }
                     }
                 } else if(loadItemLength > 0 && loadItemLength < dataLengh){ //読み込まれた記事が0以上総記事未満のとき
                     if(loadNum < setAdj){ //残りの記事が３より多い場合
                         for (var i=0; i<loadNum; i++) {
                             v = i+setBeg;
-                            $('<li class="main__articleItem"><span>' + data[0].columns01[v].ttl + '</span>' + data[0].columns01[v].date + '<br>' + data[0].columns01[v].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
+                            $('<li class="main__articleItem"><span>' + data.columns01[v].ttl + '</span>' + data.columns01[v].date + '<br>' + data.columns01[v].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
                         }
                     } else if(loadNum >= setAdj){
                         for (var i=0; i<setAdj; i++) {
                             v = i+setBeg;
-                            $('<li class="main__articleItem"><span>' + data[0].columns01[v].ttl + '</span>' + data[0].columns01[v].date + '<br>' + data[0].columns01[v].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
+                            $('<li class="main__articleItem"><span>' + data.columns01[v].ttl + '</span>' + data.columns01[v].date + '<br>' + data.columns01[v].txt +'</li>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
                         }
                         setMore.remove();
                     }
